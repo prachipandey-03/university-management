@@ -14,23 +14,23 @@
   --accent: #4dd0e1;
   --accent2: #b39ddb;
   --white: #ffffff;
-  /* AGENT 7: Ultra-transparent glass cards */
-  --glass-bg: rgba(255,255,255,0.06);
-  --glass-border: rgba(255,255,255,0.15);
-  --glass-shadow: rgba(124,110,247,0.2);
-  --text-primary: #f0f5ff;
-  --text-secondary: #b8c8e8;
-  --text-light: rgba(255,255,255,0.95);
-  --text-muted: rgba(255,255,255,0.55);
+  /* Light theme glass cards */
+  --glass-bg: rgba(255,255,255,0.55);
+  --glass-border: rgba(255,255,255,0.75);
+  --glass-shadow: rgba(124,110,247,0.15);
+  --text-primary: #0d1229;
+  --text-secondary: #1e2d5a;
+  --text-light: rgba(10,18,55,0.96);
+  --text-muted: rgba(30,50,110,0.75);
 
-  /* BG tones — dark library */
-  --bg-light: #0d1a2e;
-  --bg-mid: #111d32;
-  --bg-overlay: rgba(10,15,35,0.55);
+  /* BG tones — light */
+  --bg-light: #eef2ff;
+  --bg-mid: #e8eeff;
+  --bg-overlay: rgba(230,240,255,0.45);
 
   /* Gradients */
   --grad-primary: linear-gradient(135deg, #7c6ef7 0%, #5b9cf6 50%, #4dd0e1 100%);
-  --grad-glass: linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.02) 100%);
+  --grad-glass: linear-gradient(135deg, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.35) 100%);
 
   /* Sizing */
   --radius-sm: 10px;
@@ -38,8 +38,8 @@
   --radius-lg: 28px;
   --radius-xl: 40px;
 
-  --shadow-glass: 0 8px 32px rgba(124,110,247,0.25), 0 2px 8px rgba(91,156,246,0.15);
-  --shadow-strong: 0 20px 60px rgba(124,110,247,0.35);
+  --shadow-glass: 0 8px 32px rgba(124,110,247,0.18), 0 2px 8px rgba(91,156,246,0.12);
+  --shadow-strong: 0 20px 60px rgba(124,110,247,0.25);
 }
 
 html {
@@ -52,7 +52,7 @@ body {
   min-height: 100vh;
   overflow: hidden;
   position: relative;
-  background: var(--bg-light);
+  background: #dde8ff;
   color: var(--text-primary);
 }
 
@@ -75,9 +75,9 @@ body.dashboard-page {
   inset: 0;
   z-index: 1;
   background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(100,130,200,0.25) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(80,110,180,0.2) 0%, transparent 55%),
-    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(30,50,100,0.4) 0%, transparent 70%);
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(180,200,255,0.30) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 90%, rgba(160,200,240,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(220,235,255,0.35) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -86,12 +86,12 @@ body.dashboard-page {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(135deg, rgba(124,110,247,0.08) 0%, transparent 40%),
-    linear-gradient(315deg, rgba(77,208,225,0.06) 0%, transparent 40%);
+    linear-gradient(135deg, rgba(124,110,247,0.10) 0%, transparent 40%),
+    linear-gradient(315deg, rgba(77,208,225,0.08) 0%, transparent 40%);
   pointer-events: none;
 }
 
-/* AGENT 2: Full-page background image — blurred university library */
+/* Full-page background image — bright university library */
 body::before {
   content: '';
   position: fixed;
@@ -99,21 +99,21 @@ body::before {
   z-index: 0;
   background:
     url('../assets/bg-library.png') center center / cover no-repeat;
-  /* Extra dark overlay so particles + UI pop */
-  filter: brightness(0.45) saturate(1.2);
+  /* Light mode: keep image bright and airy */
+  filter: brightness(0.82) saturate(0.90);
 }
 
-/* AGENT 7: Ultra-transparent glass cards */
+/* Light theme glass cards — frosted white */
 .glass-card {
-  background: rgba(15,20,50,0.35);
-  backdrop-filter: blur(28px) saturate(200%) brightness(1.1);
-  -webkit-backdrop-filter: blur(28px) saturate(200%) brightness(1.1);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.48);
+  backdrop-filter: blur(28px) saturate(180%) brightness(1.05);
+  -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.05);
+  border: 1px solid rgba(255,255,255,0.75);
   border-radius: var(--radius-lg);
   box-shadow:
     var(--shadow-glass),
-    inset 0 1px 0 rgba(255,255,255,0.1),
-    inset 0 -1px 0 rgba(0,0,0,0.15);
+    inset 0 1px 0 rgba(255,255,255,0.85),
+    inset 0 -1px 0 rgba(100,120,200,0.08);
 }
 
 /* Scrollbar */

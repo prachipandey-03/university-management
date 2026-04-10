@@ -25,11 +25,11 @@ body.dashboard-page {
   align-items: center;
   justify-content: space-between;
   padding: 0 28px;
-  background: rgba(10,14,40,0.75);
-  backdrop-filter: blur(24px) saturate(200%);
-  -webkit-backdrop-filter: blur(24px) saturate(200%);
-  border-bottom: 1px solid rgba(124,110,247,0.25);
-  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  background: rgba(255,255,255,0.62);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(124,110,247,0.18);
+  box-shadow: 0 2px 20px rgba(124,110,247,0.10);
   z-index: 50;
   animation: slideDown 0.6s cubic-bezier(0.16,1,0.3,1);
 }
@@ -49,11 +49,11 @@ body.dashboard-page {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #1a1a3e, #2a2a5e);
+  background: linear-gradient(145deg, #ede8ff, #d4e4fc);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 15px rgba(124,110,247,0.5);
+  box-shadow: 0 0 15px rgba(124,110,247,0.35);
   position: relative;
 }
 
@@ -78,7 +78,7 @@ body.dashboard-page {
   font-size: 1.1rem;
   font-weight: 800;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #a89cf7, #6db4f8);
+  background: linear-gradient(135deg, #6a5ef7, #4a8ef8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -89,7 +89,7 @@ body.dashboard-page {
   font-size: 0.62rem;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: rgba(180,195,240,0.7);
+  color: rgba(15,30,100,0.80);
 }
 
 .topbar-center {
@@ -108,9 +108,9 @@ body.dashboard-page {
 .topbar-center input {
   border: none; background: transparent; outline: none;
   font-family: 'Outfit', sans-serif; font-size: 0.85rem;
-  color: rgba(200,220,255,0.9); width: 100%;
+  color: rgba(8,18,70,0.92); width: 100%;
 }
-.topbar-center input::placeholder { color: rgba(160,180,220,0.55); }
+.topbar-center input::placeholder { color: rgba(30,60,140,0.55); }
 
 .topbar-right {
   display: flex;
@@ -122,15 +122,15 @@ body.dashboard-page {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1px solid rgba(124,110,247,0.3);
-  background: rgba(20,25,60,0.5);
+  border: 1px solid rgba(124,110,247,0.25);
+  background: rgba(240,242,255,0.55);
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: rgba(160,180,230,0.85);
+  color: rgba(80,90,180,0.80);
   position: relative;
 }
 
@@ -172,10 +172,10 @@ body.dashboard-page {
 .sidebar {
   grid-column: 1;
   grid-row: 2;
-  background: rgba(8,12,38,0.72);
-  backdrop-filter: blur(28px) saturate(200%);
-  -webkit-backdrop-filter: blur(28px) saturate(200%);
-  border-right: 1px solid rgba(124,110,247,0.2);
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-right: 1px solid rgba(124,110,247,0.15);
   overflow-y: auto;
   overflow-x: hidden;
   padding: 20px 0;
@@ -233,19 +233,19 @@ body.dashboard-page {
 .sidebar-section-name {
   font-weight: 600;
   font-size: 0.92rem;
-  color: rgba(190,210,255,0.9);
+  color: rgba(8,18,70,0.92);
   transition: color 0.2s ease;
 }
 
 .sidebar-section-header.active .sidebar-section-name,
 .sidebar-section-header:hover .sidebar-section-name {
-  color: #b0a0ff;
+  color: #7c6ef7;
 }
 
 .sidebar-chevron {
   width: 16px;
   height: 16px;
-  color: rgba(80,100,160,0.4);
+  color: rgba(100,120,200,0.35);
   transition: transform 0.3s ease;
   flex-shrink: 0;
 }
@@ -272,7 +272,7 @@ body.dashboard-page {
   gap: 10px;
   padding: 10px 22px 10px 46px;
   cursor: pointer;
-  color: rgba(170,190,240,0.8);
+  color: rgba(10,25,90,0.82);
   font-size: 0.86rem;
   font-weight: 500;
   transition: all 0.2s ease;
@@ -291,8 +291,8 @@ body.dashboard-page {
 }
 
 .sidebar-sub-item:hover {
-  color: #c5bbff;
-  background: rgba(124,110,247,0.12);
+  color: #5a4fcf;
+  background: rgba(124,110,247,0.10);
   padding-left: 50px;
 }
 
@@ -326,7 +326,7 @@ body.dashboard-page {
   gap: 12px;
   padding: 12px 22px;
   cursor: pointer;
-  color: rgba(255,130,120,0.85);
+  color: rgba(200,60,60,0.80);
   font-size: 0.88rem;
   font-weight: 600;
   transition: all 0.2s ease;
@@ -349,6 +349,7 @@ body.dashboard-page {
   flex-direction: column;
   gap: 24px;
   animation: fadeInUp 0.8s 0.1s cubic-bezier(0.16,1,0.3,1) both;
+  background: rgba(210,220,250,0.22);
 }
 
 @keyframes fadeInUp {
@@ -367,7 +368,7 @@ body.dashboard-page {
   font-size: 1.65rem;
   font-weight: 800;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #c4aaff, #7abcff);
+  background: linear-gradient(135deg, #4a3dd4, #2a6be0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -377,7 +378,7 @@ body.dashboard-page {
   font-size: 0.75rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(180,200,255,0.6);
+  color: rgba(10,25,90,0.72);
   margin-top: 4px;
 }
 
@@ -428,13 +429,13 @@ body.dashboard-page {
 }
 
 .stat-card {
-  background: rgba(12,18,55,0.65);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(124,110,247,0.2);
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(180,190,240,0.55);
   border-radius: 20px;
   padding: 24px 26px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07);
+  box-shadow: 0 6px 28px rgba(80,80,200,0.14), inset 0 1px 0 rgba(255,255,255,0.90);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -505,7 +506,7 @@ body.dashboard-page {
   letter-spacing: -1.5px;
   line-height: 1;
   margin-bottom: 6px;
-  background: linear-gradient(135deg, #d0c3ff, #8ac4ff);
+  background: linear-gradient(135deg, #3a2fb8, #1a5cd0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -515,8 +516,8 @@ body.dashboard-page {
   font-size: 0.72rem;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: rgba(180,200,255,0.7);
-  font-weight: 600;
+  color: rgba(5,15,70,0.85);
+  font-weight: 700;
 }
 
 /* ---- Content Grid ---- */
@@ -528,13 +529,13 @@ body.dashboard-page {
 
 /* ---- Table Card ---- */
 .table-card {
-  background: rgba(10,15,48,0.68);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(124,110,247,0.18);
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(180,190,240,0.55);
   border-radius: 20px;
   padding: 24px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+  box-shadow: 0 6px 28px rgba(80,80,200,0.14), inset 0 1px 0 rgba(255,255,255,0.90);
   animation: fadeInUp 0.7s 0.3s both;
 }
 
@@ -548,7 +549,7 @@ body.dashboard-page {
 .table-title {
   font-size: 1rem;
   font-weight: 700;
-  color: rgba(200,220,255,0.95);
+  color: rgba(5,15,65,0.95);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -574,8 +575,8 @@ body.dashboard-page {
 }
 
 .table-search svg { color: rgba(80,100,160,0.4); flex-shrink: 0; }
-.table-search input { border: none; background: transparent; outline: none; font-family: 'Outfit', sans-serif; font-size: 0.82rem; color: rgba(40,50,90,0.7); width: 100%; }
-.table-search input::placeholder { color: rgba(80,100,150,0.35); }
+.table-search input { border: none; background: transparent; outline: none; font-family: 'Outfit', sans-serif; font-size: 0.82rem; color: rgba(8,18,70,0.90); width: 100%; }
+.table-search input::placeholder { color: rgba(30,55,140,0.50); }
 
 /* Table */
 .data-table {
@@ -589,7 +590,7 @@ body.dashboard-page {
   font-size: 0.7rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(90,79,207,0.7);
+  color: rgba(60,48,180,0.90);
   font-weight: 700;
   border-bottom: 1px solid rgba(124,110,247,0.15);
 }
@@ -597,8 +598,8 @@ body.dashboard-page {
 .data-table td {
   padding: 13px 14px;
   font-size: 0.88rem;
-  color: rgba(200,220,255,0.82);
-  border-bottom: 1px solid rgba(124,110,247,0.1);
+  color: rgba(5,15,60,0.90);
+  border-bottom: 1px solid rgba(124,110,247,0.10);
   transition: background 0.2s ease;
 }
 
@@ -650,19 +651,19 @@ body.dashboard-page {
 
 /* Quick Actions */
 .quick-actions-card {
-  background: rgba(10,15,48,0.68);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(124,110,247,0.18);
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(180,190,240,0.55);
   border-radius: 20px;
   padding: 22px 20px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+  box-shadow: 0 6px 28px rgba(80,80,200,0.14), inset 0 1px 0 rgba(255,255,255,0.90);
 }
 
 .panel-title {
   font-size: 0.88rem;
   font-weight: 700;
-  color: rgba(200,220,255,0.9);
+  color: rgba(5,15,65,0.95);
   letter-spacing: 0.5px;
   margin-bottom: 16px;
   display: flex;
@@ -684,9 +685,9 @@ body.dashboard-page {
   gap: 12px;
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid rgba(124,110,247,0.2);
+  border: 1px solid rgba(160,175,240,0.40);
   border-radius: 12px;
-  background: rgba(20,25,65,0.5);
+  background: rgba(235,238,255,0.70);
   cursor: pointer;
   transition: all 0.3s ease;
   margin-bottom: 8px;
@@ -711,13 +712,13 @@ body.dashboard-page {
 .quick-btn-text {
   font-size: 0.85rem;
   font-weight: 600;
-  color: rgba(200,220,255,0.9);
+  color: rgba(5,15,65,0.95);
   line-height: 1.2;
 }
 
 .quick-btn-sub {
   font-size: 0.72rem;
-  color: rgba(160,185,240,0.65);
+  color: rgba(10,25,90,0.72);
   font-weight: 400;
 }
 
@@ -732,13 +733,13 @@ body.dashboard-page {
 
 /* Announcement Card */
 .announce-card {
-  background: rgba(10,15,48,0.68);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(124,110,247,0.18);
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(180,190,240,0.55);
   border-radius: 20px;
   padding: 22px 20px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+  box-shadow: 0 6px 28px rgba(80,80,200,0.14), inset 0 1px 0 rgba(255,255,255,0.90);
 }
 
 .announce-item {
@@ -759,26 +760,26 @@ body.dashboard-page {
 
 .announce-text {
   font-size: 0.82rem;
-  color: rgba(195,215,255,0.85);
+  color: rgba(5,15,60,0.90);
   line-height: 1.5;
 }
 
 .announce-date {
   font-size: 0.7rem;
-  color: rgba(160,185,240,0.6);
+  color: rgba(10,30,100,0.72);
   margin-top: 4px;
   font-weight: 500;
 }
 
 /* Calendar mini */
 .calendar-mini {
-  background: rgba(10,15,48,0.68);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(124,110,247,0.18);
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(180,190,240,0.55);
   border-radius: 20px;
   padding: 22px 20px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+  box-shadow: 0 6px 28px rgba(80,80,200,0.14), inset 0 1px 0 rgba(255,255,255,0.90);
 }
 
 .cal-header {
@@ -791,7 +792,7 @@ body.dashboard-page {
 .cal-month {
   font-size: 0.88rem;
   font-weight: 700;
-  color: rgba(200,220,255,0.9);
+  color: rgba(5,15,65,0.95);
 }
 
 .cal-nav {
@@ -820,7 +821,7 @@ body.dashboard-page {
   font-size: 0.65rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: rgba(90,79,207,0.6);
+  color: rgba(60,48,180,0.90);
   font-weight: 700;
   padding: 4px 0;
 }
@@ -831,7 +832,7 @@ body.dashboard-page {
   padding: 5px 3px;
   border-radius: 6px;
   cursor: pointer;
-  color: rgba(190,210,255,0.75);
+  color: rgba(8,18,80,0.88);
   transition: all 0.2s ease;
   font-weight: 500;
 }
