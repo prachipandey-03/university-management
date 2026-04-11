@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UniVerse — Scholarships</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/ums-pages.css" />
+</head>
+<body class="dashboard-page" data-ums-page="scholarships">
+  <script src="js/session-guard.js"></script>
+  <canvas id="particleCanvas"></canvas>
+  <div class="bg-overlay"></div>
+  <div class="bg-light-rays"></div>
+  <div class="dashboard-layout">
+    <header class="topbar" id="umsTopbar"></header>
+    <nav class="sidebar" id="umsSidebar"></nav>
+    <main class="main-content">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Scholarship Management</h1>
+          <p class="page-breadcrumb">Dashboard → Finance → Scholarship Management</p>
+        </div>
+        <div class="page-header-actions"><a class="btn-sm" href="dashboard.html">← Dashboard</a></div>
+      </div>
+      <div class="ums-page-grid two-col">
+        <div class="table-card ums-form-card">
+          <h2>Add scholarship</h2>
+          <form onsubmit="submitFormJson(event, '/api/scholarships'); return false;">
+            <input class="form-input" name="scholarshipName" placeholder="Scholarship name" required style="width:100%;margin-bottom:0.85rem;box-sizing:border-box;" />
+            <input class="form-input" name="studentId" placeholder="Student ID" required style="width:100%;margin-bottom:0.85rem;box-sizing:border-box;" />
+            <input class="form-input" type="number" name="amount" placeholder="Amount" required min="0" step="1" style="width:100%;margin-bottom:0.85rem;box-sizing:border-box;" />
+            <input class="form-input" name="status" placeholder="Status (optional)" style="width:100%;margin-bottom:0.85rem;box-sizing:border-box;" />
+            <button type="submit" class="btn-sm primary" style="width:100%;padding:12px;">Save</button>
+          </form>
+        </div>
+        <div class="table-card">
+          <div class="table-header"><div class="table-title"><span class="table-title-dot"></span> Awards</div></div>
+          <table class="data-table"><thead><tr><th>Name</th><th>Student</th><th>Amount</th><th>Status</th></tr></thead><tbody id="schBody"></tbody></table>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div id="toast" style="position:fixed;bottom:28px;right:28px;z-index:999;background:rgba(255,255,255,0.22);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.35);border-radius:14px;padding:14px 22px;min-width:220px;box-shadow:0 8px 30px rgba(124,110,247,0.2);font-size:0.88rem;color:rgba(40,50,90,0.8);font-weight:600;display:none;align-items:center;gap:10px;">
+    <span id="toastIcon">✓</span><span id="toastMsg"></span>
+  </div>
+  <script src="js/api.js"></script>
+  <script src="js/nav-config.js"></script>
+  <script src="js/app-shell.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/pages.js"></script>
+  <script>
+    function loadSch() {
+      umsLoadTable('/api/scholarships', 'schBody', (s) =>
+        `<td>${s.scholarshipName}</td><td>${s.studentId}</td><td>₹${s.amount}</td><td>${s.status}</td>`);
+    }
+    window.onAfterSubmit = function (ep) { if (ep === '/api/scholarships') loadSch(); };
+    document.addEventListener('DOMContentLoaded', loadSch);
+  </script>
+</body>
+</html>

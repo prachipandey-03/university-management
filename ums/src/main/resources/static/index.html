@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UniVerse — University Management System</title>
+  <meta name="description" content="UniVerse — A next-generation University Management System for modern academic institutions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/landing.css" />
+</head>
+<body class="landing-page">
+
+  <!-- Particle Canvas -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Background -->
+  <div class="bg-overlay"></div>
+  <div class="bg-light-rays"></div>
+
+  <!-- Main Content -->
+  <div class="landing-container" id="landingContainer">
+
+    <!-- Logo Section -->
+    <div class="logo-wrapper" id="logoWrapper">
+      <div class="logo-outer-ring" id="logoRing">
+        <div class="logo-ring-rotate"></div>
+        <div class="logo-inner" id="logoInner">
+          <!-- Agent 1: Generated PNG Logo -->
+          <img
+            id="logoSvg"
+            src="assets/ums-logo.png"
+            alt="UniVerse UMS Logo"
+            style="width:145px;height:145px;object-fit:contain;filter:drop-shadow(0 0 18px rgba(124,110,247,0.9));border-radius:50%;"
+          />
+        </div>
+      </div>
+
+      <!-- University Name -->
+      <div class="university-name" id="uniName">
+        <h1 class="uni-title">UniVerse</h1>
+        <p class="uni-subtitle">University Management System</p>
+      </div>
+    </div>
+
+    <!-- Enter Button -->
+    <div class="enter-btn-wrapper" id="enterBtnWrapper">
+      <button class="enter-btn" id="enterBtn" onclick="triggerEnterAnimation()">
+        <span class="btn-bg-anim"></span>
+        <span class="btn-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="btn-text">Enter the System</span>
+        <span class="btn-pulse"></span>
+      </button>
+      <p class="btn-hint">Authorized Personnel Only</p>
+    </div>
+
+  </div>
+
+  <!-- Logo Explosion Overlay (for transition) -->
+  <div class="logo-explode-overlay" id="logoExplodeOverlay">
+    <div class="explode-ring r1"></div>
+    <div class="explode-ring r2"></div>
+    <div class="explode-ring r3"></div>
+    <div class="explode-particles" id="explodeParticles"></div>
+  </div>
+
+  <script src="js/particles.js"></script>
+  <script src="js/landing.js"></script>
+</body>
+</html>

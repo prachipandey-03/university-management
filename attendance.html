@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UniVerse — Dashboard</title>
+  <meta name="description" content="UniVerse University Management System — Administration Dashboard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body class="dashboard-page">
+
+  <canvas id="particleCanvas"></canvas>
+  <div class="bg-overlay"></div>
+  <div class="bg-light-rays"></div>
+
+  <div class="dashboard-layout">
+
+    <!-- ===== TOPBAR ===== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-logo" id="topbarLogo">
+          <img src="assets/ums-logo-new.png" alt="UniVerse UMS" style="width:30px;height:30px;object-fit:contain;border-radius:50%;" />
+        </div>
+        <div class="topbar-brand">
+          <span class="topbar-brand-name">UniVerse</span>
+          <span class="topbar-brand-sub">Management System</span>
+        </div>
+      </div>
+
+      <div class="topbar-center">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input type="text" id="globalSearch" placeholder="Search students, records, courses…" />
+      </div>
+
+      <div class="topbar-right">
+        <!-- Notifications -->
+        <button class="topbar-icon-btn" id="notifBtn" title="Notifications">
+          <div class="notif-badge"></div>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+        </button>
+        <!-- Settings -->
+        <button class="topbar-icon-btn" id="settingsBtn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <!-- Avatar -->
+        <div class="topbar-avatar" id="topbarAvatar" title="Admin Profile">AD</div>
+      </div>
+    </header>
+
+    <!-- ===== SIDEBAR ===== -->
+    <nav class="sidebar" id="sidebar">
+
+      <!-- Master -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-header active" id="sh-master" onclick="toggleSection('master')">
+          <div class="sidebar-section-left">
+            <div class="sidebar-section-icon" style="background: linear-gradient(135deg, rgba(124,110,247,0.2), rgba(91,156,246,0.2));">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c6ef7" stroke-width="2">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+              </svg>
+            </div>
+            <span class="sidebar-section-name">Master</span>
+          </div>
+          <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+        <div class="sidebar-sub-items open" id="si-master">
+          <div class="sidebar-sub-item" onclick="setActivePage('New Faculty', 'Master')">New Faculty</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('New Student Admission', 'Master')">New Student Admission</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Department Setup', 'Master')">Department Setup</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Course Management', 'Master')">Course Management</div>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Details -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-header" id="sh-details" onclick="toggleSection('details')">
+          <div class="sidebar-section-left">
+            <div class="sidebar-section-icon" style="background: linear-gradient(135deg, rgba(91,156,246,0.2), rgba(77,208,225,0.2));">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5b9cf6" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <span class="sidebar-section-name">Details</span>
+          </div>
+          <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+        <div class="sidebar-sub-items" id="si-details">
+          <div class="sidebar-sub-item" onclick="setActivePage('Student Details', 'Details')">Student Details</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Teacher Details', 'Details')">Teacher Details</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Department Details', 'Details')">Department Details</div>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Attendance -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-header" id="sh-attendance" onclick="toggleSection('attendance')">
+          <div class="sidebar-section-left">
+            <div class="sidebar-section-icon" style="background: linear-gradient(135deg, rgba(77,208,225,0.2), rgba(124,110,247,0.2));">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4dd0e1" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+                <polyline points="9 16 11 18 15 14"/>
+              </svg>
+            </div>
+            <span class="sidebar-section-name">Attendance</span>
+          </div>
+          <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+        <div class="sidebar-sub-items" id="si-attendance">
+          <div class="sidebar-sub-item" onclick="setActivePage('Student Attendance', 'Attendance')">Student Attendance</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Teacher Attendance', 'Attendance')">Teacher Attendance</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Student Attendance Detail', 'Attendance')">Student Attendance Detail</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Teacher Attendance Detail', 'Attendance')">Teacher Attendance Detail</div>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Examination -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-header" id="sh-exam" onclick="toggleSection('exam')">
+          <div class="sidebar-section-left">
+            <div class="sidebar-section-icon" style="background: linear-gradient(135deg, rgba(179,157,219,0.2), rgba(124,110,247,0.2));">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b39ddb" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <span class="sidebar-section-name">Examination</span>
+          </div>
+          <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+        <div class="sidebar-sub-items" id="si-exam">
+          <div class="sidebar-sub-item" onclick="setActivePage('Exam Schedule', 'Examination')">Exam Schedule</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Mark Entry', 'Examination')">Mark Entry</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Result Declaration', 'Examination')">Result Declaration</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Grade Report', 'Examination')">Grade Report</div>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Finance -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-header" id="sh-finance" onclick="toggleSection('finance')">
+          <div class="sidebar-section-left">
+            <div class="sidebar-section-icon" style="background: linear-gradient(135deg, rgba(91,156,246,0.2), rgba(179,157,219,0.2));">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5b9cf6" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"/>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <span class="sidebar-section-name">Finance</span>
+          </div>
+          <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+        <div class="sidebar-sub-items" id="si-finance">
+          <div class="sidebar-sub-item" onclick="setActivePage('Fee Collection', 'Finance')">Fee Collection</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Fee Structure', 'Finance')">Fee Structure</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Scholarship Management', 'Finance')">Scholarship Management</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Finance Report', 'Finance')">Finance Report</div>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Library -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-header" id="sh-library" onclick="toggleSection('library')">
+          <div class="sidebar-section-left">
+            <div class="sidebar-section-icon" style="background: linear-gradient(135deg, rgba(77,208,225,0.2), rgba(91,156,246,0.15));">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4dd0e1" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+            <span class="sidebar-section-name">Library</span>
+          </div>
+          <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+        <div class="sidebar-sub-items" id="si-library">
+          <div class="sidebar-sub-item" onclick="setActivePage('Book Catalog', 'Library')">Book Catalog</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Issue / Return', 'Library')">Issue / Return</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Library Members', 'Library')">Library Members</div>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <!-- Reports -->
+      <div class="sidebar-section">
+        <div class="sidebar-section-header" id="sh-reports" onclick="toggleSection('reports')">
+          <div class="sidebar-section-left">
+            <div class="sidebar-section-icon" style="background: linear-gradient(135deg, rgba(124,110,247,0.15), rgba(77,208,225,0.15));">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c6ef7" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6"  y1="20" x2="6"  y2="14"/>
+              </svg>
+            </div>
+            <span class="sidebar-section-name">Reports</span>
+          </div>
+          <svg class="sidebar-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+        <div class="sidebar-sub-items" id="si-reports">
+          <div class="sidebar-sub-item" onclick="setActivePage('Student Report', 'Reports')">Student Report</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Attendance Report', 'Reports')">Attendance Report</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Finance Report', 'Reports')">Finance Report</div>
+          <div class="sidebar-sub-item" onclick="setActivePage('Examination Report', 'Reports')">Examination Report</div>
+        </div>
+      </div>
+
+      <!-- Logout -->
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-logout" onclick="handleLogout()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Logout
+      </div>
+
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content" id="mainContent">
+
+      <div class='page-header'><div><h1 class='page-title'>Mark Attendance</h1><p class='page-breadcrumb'>Attendance</p></div><div class='page-header-actions'><button class='btn-sm' onclick="window.location.href='dashboard.html'">← Back to Dashboard</button></div></div><div class='content-grid' style='display:block'><div class='table-card' style='max-width:500px;margin:20px auto;padding:24px'><h2 style='margin-bottom:20px; font-size:1.2rem; color: #fff;'>Daily Attendance</h2><form id='pageForm' onsubmit="submitForm(event, '/api/attendance')"><input type='date' id='date' class='form-input' style='width:100%;margin-bottom:15px' required><input type='number' id='totalCount' placeholder='Total count' class='form-input' style='width:100%;margin-bottom:15px' required><input type='number' id='presentCount' placeholder='Present count' class='form-input' style='width:100%;margin-bottom:15px' required><button type='submit' class='btn-sm primary' style='width:100%;padding:12px;'>Submit</button></form></div></div></main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" style="
+    position:fixed; bottom:28px; right:28px; z-index:999;
+    background: rgba(255,255,255,0.22);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 14px;
+    padding: 14px 22px;
+    min-width: 220px;
+    box-shadow: 0 8px 30px rgba(124,110,247,0.2);
+    font-size: 0.88rem;
+    color: rgba(40,50,90,0.8);
+    font-weight: 600;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+  ">
+    <span id="toastIcon">✓</span>
+    <span id="toastMsg">Action completed</span>
+  </div>
+
+  <script src="js/particles.js"></script>
+  <script src="js/pages.js"></script>
+</body>
+</html>
+

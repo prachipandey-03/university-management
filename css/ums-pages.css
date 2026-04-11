@@ -1,0 +1,35 @@
+/* Shared inner-page layout */
+.ums-page-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 960px) {
+  .ums-page-grid.two-col {
+    grid-template-columns: minmax(280px, 400px) 1fr;
+    align-items: start;
+  }
+}
+
+.ums-form-card {
+  max-width: 520px;
+}
+
+.ums-form-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.ums-form-card .form-input {
+  width: 100%;
+  margin-bottom: 0.85rem;
+  box-sizing: border-box;
+}
+
+.ums-muted {
+  color: rgba(40, 50, 90, 0.65);
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+}
