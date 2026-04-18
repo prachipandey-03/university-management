@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UniVerse — Project Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <style>
+    /* ===== ROOT DESIGN TOKENS ===== */
+    :root {
+      --bg-dark: #0a0a1a;
+      --bg-card: rgba(255,255,255,0.04);
+      --border-glass: rgba(255,255,255,0.08);
+      --accent-purple: #7c6ef7;
+      --accent-blue: #5b9cf6;
+      --accent-cyan: #4dd0e1;
+      --accent-lavender: #b39ddb;
+      --text-primary: #f0f0ff;
+      --text-secondary: rgba(240,240,255,0.55);
+      --gradient-main: linear-gradient(135deg, #7c6ef7, #5b9cf6, #4dd0e1);
+      --gradient-warm: linear-gradient(135deg, #b39ddb, #7c6ef7);
+      --gradient-cool: linear-gradient(135deg, #5b9cf6, #4dd0e1);
+    }
+
+    /* ===== GLOBAL RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-dark);
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      overflow: hidden;
+    }
+
+    /* ===== REVEAL OVERRIDES ===== */
+    .reveal {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
+      padding: 40px 60px;
+      height: 100%;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .reveal .slide-background {
+      background: var(--bg-dark) !important;
+    }
+
+    /* ===== ANIMATED BACKGROUND ===== */
+    .bg-mesh {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-mesh .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.3;
+      animation: orbFloat 20s ease-in-out infinite alternate;
+    }
+
+    .bg-mesh .orb:nth-child(1) {
+      width: 600px; height: 600px;
+      background: var(--accent-purple);
+      top: -10%; left: -10%;
+      animation-duration: 25s;
+    }
+    .bg-mesh .orb:nth-child(2) {
+      width: 500px; height: 500px;
+      background: var(--accent-cyan);
+      bottom: -15%; right: -10%;
+      animation-duration: 20s;
+      animation-delay: -5s;
+    }
+    .bg-mesh .orb:nth-child(3) {
+      width: 400px; height: 400px;
+      background: var(--accent-blue);
+      top: 40%; left: 50%;
+      animation-duration: 30s;
+      animation-delay: -10s;
+    }
+    .bg-mesh .orb:nth-child(4) {
+      width: 350px; height: 350px;
+      background: var(--accent-lavender);
+      bottom: 20%; left: 10%;
+      animation-duration: 22s;
+      animation-delay: -7s;
+    }
+
+    @keyframes orbFloat {
+      0%   { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(60px, -40px) scale(1.1); }
+      66%  { transform: translate(-30px, 50px) scale(0.95); }
+      100% { transform: translate(20px, -20px) scale(1.05); }
+    }
+
+    /* ===== NOISE OVERLAY ===== */
+    .noise-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      pointer-events: none;
+    }
+
+    /* ===== GRID LINES BG ===== */
+    .grid-lines {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(124,110,247,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,110,247,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+
+    /* ===== SLIDE COUNTER ===== */
+    .reveal .slide-number {
+      font-family: 'Outfit', sans-serif !important;
+      font-size: 0.7rem !important;
+      color: var(--text-secondary) !important;
+      background: var(--bg-card) !important;
+      border: 1px solid var(--border-glass) !important;
+      backdrop-filter: blur(12px) !important;
+      border-radius: 8px !important;
+      padding: 4px 10px !important;
+      right: 20px !important;
+      bottom: 20px !important;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .slide-tag {
+      display: inline-block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      background: rgba(77,208,225,0.08);
+      border: 1px solid rgba(77,208,225,0.15);
+      border-radius: 20px;
+      padding: 6px 18px;
+      margin-bottom: 20px;
+    }
+
+    .slide-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .slide-title.smaller { font-size: 2.4rem; }
+
+    .slide-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    /* ===== GLASS CARD ===== */
+    .glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 18px;
+      padding: 28px 32px;
+      backdrop-filter: blur(16px);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(124,110,247,0.2);
+      transform: translateY(-2px);
+    }
+
+    .glass-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .glass-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ===== CARDS GRID ===== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .cards-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    /* ===== ICON BOX ===== */
+    .icon-box {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    /* ===== FEATURE LIST ===== */
+    .feature-list {
+      list-style: none;
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      padding: 10px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      transition: all 0.25s ease;
+    }
+
+    .feature-list li:hover {
+      border-color: rgba(124,110,247,0.2);
+      color: var(--text-primary);
+    }
+
+    .feature-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ===== TECH STACK BADGES ===== */
+    .tech-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .tech-badge:hover {
+      border-color: rgba(124,110,247,0.3);
+      transform: translateY(-2px);
+    }
+
+    .tech-badge .tech-icon {
+      font-size: 1.4rem;
+    }
+
+    .tech-badges-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    /* ===== ARCH DIAGRAM ===== */
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .arch-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      padding: 18px 28px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .arch-box:hover {
+      border-color: rgba(91,156,246,0.3);
+      transform: scale(1.03);
+    }
+
+    .arch-box .arch-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .arch-box .arch-sub {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+    }
+
+    .arch-arrow {
+      color: var(--accent-purple);
+      font-size: 1.5rem;
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    /* ===== SPLIT LAYOUT ===== */
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    /* ===== STATS MINI ===== */
+    .stat-mini {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .stat-mini .stat-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-mini .stat-lbl {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline {
+      margin-top: 24px;
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent-purple), var(--accent-cyan));
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 22px;
+      padding: 14px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -25px; top: 18px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent-purple);
+      border: 2px solid var(--bg-dark);
+    }
+
+    .timeline-item h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .timeline-item p {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    /* ===== TITLE SLIDE SPECIAL ===== */
+    .title-slide {
+      text-align: center;
+      align-items: center !important;
+    }
+
+    .title-logo {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: rgba(124,110,247,0.08);
+      border: 2px solid rgba(124,110,247,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      position: relative;
+      animation: logoPulse 3s ease-in-out infinite;
+    }
+
+    .title-logo::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1px solid rgba(124,110,247,0.1);
+      animation: logoRing 4s linear infinite;
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(124,110,247,0.2); }
+      50%      { box-shadow: 0 0 40px 10px rgba(124,110,247,0.15); }
+    }
+
+    @keyframes logoRing {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .title-logo img {
+      width: 80px; height: 80px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(124,110,247,0.6));
+      border-radius: 50%;
+    }
+
+    .title-main {
+      font-family: 'Outfit', sans-serif;
+      font-size: 4.2rem;
+      font-weight: 900;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .title-tagline {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .title-meta {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 10px;
+    }
+
+    .title-meta span {
+      color: var(--accent-cyan);
+    }
+
+    /* ===== THANK YOU SLIDE ===== */
+    .thankyou-slide {
+      text-align: center;
+      align-items: center !important;
+    }
+
+    .thankyou-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 4.5rem;
+      font-weight: 900;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -2px;
+      margin-bottom: 10px;
+    }
+
+    .thankyou-sub {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+    }
+
+    .team-grid {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      padding: 32px 40px;
+      text-align: center;
+      backdrop-filter: blur(16px);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient-main);
+      border-radius: 20px 20px 0 0;
+    }
+
+    .team-card:hover {
+      border-color: rgba(124,110,247,0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(124,110,247,0.15);
+    }
+
+    .team-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      margin: 0 auto 16px;
+      position: relative;
+    }
+
+    .team-avatar::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(124,110,247,0.2);
+    }
+
+    .team-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .team-id {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+
+    /* ===== MODULE FLOW DIAGRAM ===== */
+    .module-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .module-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .module-item:hover {
+      border-color: rgba(91,156,246,0.3);
+      transform: translateY(-3px);
+    }
+
+    .module-item .mod-icon {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .module-item .mod-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .module-item .mod-count {
+      font-size: 0.68rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* ===== PROGRESS CONTROLS ===== */
+    .reveal .controls {
+      color: var(--accent-purple) !important;
+    }
+
+    .reveal .progress span {
+      background: var(--gradient-main) !important;
+    }
+
+    /* ===== DB SCHEMA VISUAL ===== */
+    .schema-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .schema-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .schema-pill:hover {
+      border-color: rgba(77,208,225,0.3);
+      transform: scale(1.03);
+    }
+
+    .schema-pill .pill-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .cards-grid, .split-layout { grid-template-columns: 1fr; }
+      .cards-grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .module-flow { grid-template-columns: repeat(2, 1fr); }
+      .title-main { font-size: 2.8rem; }
+      .slide-title { font-size: 2.2rem; }
+      .team-grid { flex-direction: column; align-items: center; }
+    }
+
+    /* ===== PROGRESS BAR ===== */
+    .reveal .progress {
+      height: 3px !important;
+      background: rgba(124,110,247,0.1);
+    }
+
+    /* ===== SLIDE TRANSITIONS ===== */
+    .reveal .slides section .fragment {
+      transition: all 0.4s ease;
+    }
+
+    /* ===== DIVIDER ===== */
+    .slide-divider {
+      width: 60px;
+      height: 3px;
+      background: var(--gradient-main);
+      border-radius: 3px;
+      margin: 16px 0;
+    }
+
+    /* ===== HIGHLIGHT TEXT ===== */
+    .highlight {
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    /* corner glow effect */
+    .corner-glow {
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    .corner-glow.tl { top: -60px; left: -60px; background: var(--accent-purple); }
+    .corner-glow.br { bottom: -60px; right: -60px; background: var(--accent-cyan); }
+  </style>
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-mesh">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+  <div class="noise-overlay"></div>
+  <div class="grid-lines"></div>
+
+  <!-- ===== REVEAL PRESENTATION ===== -->
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ========== SLIDE 1: TITLE ========== -->
+      <section class="title-slide">
+        <div class="title-logo">
+          <img src="assets/ums-logo.png" alt="UniVerse Logo" />
+        </div>
+        <h1 class="title-main">UniVerse</h1>
+        <p class="title-tagline">University Management System</p>
+        <div class="slide-divider" style="margin: 0 auto 20px;"></div>
+        <p class="slide-subtitle" style="text-align:center; max-width:600px; margin:0 auto;">
+          A next-generation, full-stack platform for managing every aspect of academic operations — built with Spring Boot &amp; modern web technologies.
+        </p>
+        <p class="title-meta" style="margin-top:24px;">
+          <span>Prachi Pandey</span> &nbsp;·&nbsp; <span>Anushka</span> &nbsp;·&nbsp; April 2026
+        </p>
+      </section>
+
+
+      <!-- ========== SLIDE 2: PROBLEM STATEMENT ========== -->
+      <section>
+        <span class="slide-tag">The Challenge</span>
+        <h2 class="slide-title">Problem Statement</h2>
+        <p class="slide-subtitle">
+          Traditional university administration relies on disconnected spreadsheets, paper records, and legacy systems — leading to data silos, human errors, and hours of wasted effort.
+        </p>
+        <div class="cards-grid">
+          <div class="glass-card">
+            <div class="icon-box" style="background: rgba(124,110,247,0.1);">📋</div>
+            <h3>Fragmented Records</h3>
+            <p>Student, faculty, and financial data scattered across incompatible formats.</p>
+          </div>
+          <div class="glass-card">
+            <div class="icon-box" style="background: rgba(91,156,246,0.1);">⏱️</div>
+            <h3>Manual Overhead</h3>
+            <p>Attendance, grading, and fee tracking done by hand — slow and error-prone.</p>
+          </div>
+          <div class="glass-card">
+            <div class="icon-box" style="background: rgba(77,208,225,0.1);">🔒</div>
+            <h3>No Central Access</h3>
+            <p>Lack of a single portal for stakeholders to view and manage operations.</p>
+          </div>
+          <div class="glass-card">
+            <div class="icon-box" style="background: rgba(179,157,219,0.1);">📊</div>
+            <h3>Zero Analytics</h3>
+            <p>No real-time dashboard or reports for data-driven decision making.</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========== SLIDE 3: SOLUTION ========== -->
+      <section>
+        <span class="slide-tag">Our Solution</span>
+        <h2 class="slide-title">Introducing UniVerse</h2>
+        <p class="slide-subtitle">
+          A comprehensive, web-based University Management System that centralizes academics, administration, and finance into one elegant platform.
+        </p>
+        <div class="slide-divider"></div>
+        <ul class="feature-list">
+          <li>
+            <span class="feature-dot" style="background: var(--accent-purple);"></span>
+            <strong>Unified Dashboard</strong> — Real-time overview of students, faculty, attendance &amp; financials
+          </li>
+          <li>
+            <span class="feature-dot" style="background: var(--accent-blue);"></span>
+            <strong>Role-Based Access</strong> — Secure authentication with admin-level controls
+          </li>
+          <li>
+            <span class="feature-dot" style="background: var(--accent-cyan);"></span>
+            <strong>End-to-End Modules</strong> — From admission to graduation, every workflow covered
+          </li>
+          <li>
+            <span class="feature-dot" style="background: var(--accent-lavender);"></span>
+            <strong>Beautiful UI</strong> — Glassmorphism design with smooth animations &amp; particle effects
+          </li>
+        </ul>
+      </section>
+
+
+      <!-- ========== SLIDE 4: TECH STACK ========== -->
+      <section>
+        <span class="slide-tag">Technology</span>
+        <h2 class="slide-title">Tech Stack</h2>
+        <p class="slide-subtitle">Built on industry-standard, production-grade technologies.</p>
+
+        <div class="split-layout" style="margin-top:28px;">
+          <div>
+            <h3 style="font-family:'Outfit';font-weight:600;font-size:1rem;color:var(--accent-cyan);margin-bottom:16px;">⬡ Backend</h3>
+            <div class="tech-badges-wrap">
+              <div class="tech-badge"><span class="tech-icon">☕</span> Java 17</div>
+              <div class="tech-badge"><span class="tech-icon">🍃</span> Spring Boot 4</div>
+              <div class="tech-badge"><span class="tech-icon">🗄️</span> Spring Data JPA</div>
+              <div class="tech-badge"><span class="tech-icon">🐬</span> MySQL 8</div>
+              <div class="tech-badge"><span class="tech-icon">🔐</span> Spring Security Crypto</div>
+              <div class="tech-badge"><span class="tech-icon">🧪</span> H2 (Test DB)</div>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-family:'Outfit';font-weight:600;font-size:1rem;color:var(--accent-purple);margin-bottom:16px;">◆ Frontend</h3>
+            <div class="tech-badges-wrap">
+              <div class="tech-badge"><span class="tech-icon">🌐</span> HTML5 / CSS3</div>
+              <div class="tech-badge"><span class="tech-icon">⚡</span> Vanilla JavaScript</div>
+              <div class="tech-badge"><span class="tech-icon">✨</span> Particle Effects</div>
+              <div class="tech-badge"><span class="tech-icon">🎨</span> Glassmorphism UI</div>
+              <div class="tech-badge"><span class="tech-icon">🔤</span> Outfit + Inter Fonts</div>
+              <div class="tech-badge"><span class="tech-icon">📐</span> CSS Grid / Flexbox</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========== SLIDE 5: ARCHITECTURE ========== -->
+      <section>
+        <span class="slide-tag">Architecture</span>
+        <h2 class="slide-title smaller">System Architecture</h2>
+        <p class="slide-subtitle">Clean layered architecture following MVC pattern with RESTful APIs.</p>
+
+        <div class="arch-flow">
+          <div class="arch-box">
+            <div class="arch-label">🖥️ Browser</div>
+            <div class="arch-sub">HTML / CSS / JS</div>
+          </div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-box">
+            <div class="arch-label">🔁 REST API</div>
+            <div class="arch-sub">JSON over HTTP</div>
+          </div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-box">
+            <div class="arch-label">🍃 Spring Boot</div>
+            <div class="arch-sub">Controllers · Services</div>
+          </div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-box">
+            <div class="arch-label">📦 JPA / Hibernate</div>
+            <div class="arch-sub">ORM Layer</div>
+          </div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-box">
+            <div class="arch-label">🐬 MySQL</div>
+            <div class="arch-sub">Persistent Storage</div>
+          </div>
+        </div>
+
+        <div style="margin-top:28px;">
+          <h3 style="font-family:'Outfit';font-weight:600;font-size:0.95rem;color:var(--text-primary);margin-bottom:12px;">Backend Layers</h3>
+          <div class="schema-pills">
+            <div class="schema-pill"><span class="pill-dot" style="background:var(--accent-purple);"></span>Controllers (15)</div>
+            <div class="schema-pill"><span class="pill-dot" style="background:var(--accent-blue);"></span>Entities (14)</div>
+            <div class="schema-pill"><span class="pill-dot" style="background:var(--accent-cyan);"></span>Repositories</div>
+            <div class="schema-pill"><span class="pill-dot" style="background:var(--accent-lavender);"></span>Services</div>
+            <div class="schema-pill"><span class="pill-dot" style="background:#f59e0b;"></span>DTOs</div>
+            <div class="schema-pill"><span class="pill-dot" style="background:#ef4444;"></span>Config</div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========== SLIDE 6: MODULES ========== -->
+      <section>
+        <span class="slide-tag">Features</span>
+        <h2 class="slide-title smaller">Core Modules</h2>
+        <p class="slide-subtitle">8 integrated modules covering every university operation.</p>
+
+        <div class="module-flow">
+          <div class="module-item">
+            <div class="mod-icon">🎓</div>
+            <div class="mod-name">Admissions</div>
+            <div class="mod-count">Student Registration</div>
+          </div>
+          <div class="module-item">
+            <div class="mod-icon">👨‍🏫</div>
+            <div class="mod-name">Faculty</div>
+            <div class="mod-count">Staff Management</div>
+          </div>
+          <div class="module-item">
+            <div class="mod-icon">📚</div>
+            <div class="mod-name">Courses</div>
+            <div class="mod-count">Curriculum Setup</div>
+          </div>
+          <div class="module-item">
+            <div class="mod-icon">🏛️</div>
+            <div class="mod-name">Departments</div>
+            <div class="mod-count">Org Structure</div>
+          </div>
+          <div class="module-item">
+            <div class="mod-icon">📋</div>
+            <div class="mod-name">Attendance</div>
+            <div class="mod-count">Student & Teacher</div>
+          </div>
+          <div class="module-item">
+            <div class="mod-icon">📝</div>
+            <div class="mod-name">Examinations</div>
+            <div class="mod-count">Schedule · Marks · Grades</div>
+          </div>
+          <div class="module-item">
+            <div class="mod-icon">💰</div>
+            <div class="mod-name">Finance</div>
+            <div class="mod-count">Fees · Scholarships</div>
+          </div>
+          <div class="module-item">
+            <div class="mod-icon">📖</div>
+            <div class="mod-name">Library</div>
+            <div class="mod-count">Books · Issues · Members</div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px; display:flex; gap:14px; flex-wrap:wrap;">
+          <div class="schema-pill"><span class="pill-dot" style="background:var(--accent-purple);"></span>30+ Frontend Pages</div>
+          <div class="schema-pill"><span class="pill-dot" style="background:var(--accent-cyan);"></span>15 REST Controllers</div>
+          <div class="schema-pill"><span class="pill-dot" style="background:var(--accent-blue);"></span>14 Database Entities</div>
+          <div class="schema-pill"><span class="pill-dot" style="background:var(--accent-lavender);"></span>Full CRUD Operations</div>
+        </div>
+      </section>
+
+
+      <!-- ========== SLIDE 7: DATABASE ========== -->
+      <section>
+        <span class="slide-tag">Data Model</span>
+        <h2 class="slide-title smaller">Database Design</h2>
+        <p class="slide-subtitle">14 JPA entities mapped to MySQL 8 with relational integrity.</p>
+
+        <div class="cards-grid-3" style="margin-top:24px;">
+          <div class="glass-card" style="padding:18px 22px;">
+            <h3 style="font-size:0.95rem;">👤 User</h3>
+            <p>Authentication, roles, encrypted passwords</p>
+          </div>
+          <div class="glass-card" style="padding:18px 22px;">
+            <h3 style="font-size:0.95rem;">🎓 Student</h3>
+            <p>Enrollment, department, contact details</p>
+          </div>
+          <div class="glass-card" style="padding:18px 22px;">
+            <h3 style="font-size:0.95rem;">👨‍🏫 Faculty</h3>
+            <p>Designation, department, qualifications</p>
+          </div>
+          <div class="glass-card" style="padding:18px 22px;">
+            <h3 style="font-size:0.95rem;">📘 Course</h3>
+            <p>Credits, department, semester mapping</p>
+          </div>
+          <div class="glass-card" style="padding:18px 22px;">
+            <h3 style="font-size:0.95rem;">🏛️ Department</h3>
+            <p>Name, HOD, established date</p>
+          </div>
+          <div class="glass-card" style="padding:18px 22px;">
+            <h3 style="font-size:0.95rem;">📋 Attendance</h3>
+            <p>Daily records for students &amp; teachers</p>
+          </div>
+          <div class="glass-card" style="padding:18px 22px;">
+            <h3 style="font-size:0.95rem;">📝 Exam Schedule</h3>
+            <p>Date, time, course, venue details</p>
+          </div>
+          <div class="glass-card" style="padding:18px 22px;">
+            <h3 style="font-size:0.95rem;">📊 Exam Result</h3>
+            <p>Marks, grades, CGPA calculation</p>
+          </div>
+          <div class="glass-card" style="padding:18px 22px;">
+            <h3 style="font-size:0.95rem;">💳 Fee Payment</h3>
+            <p>Amount, date, status tracking</p>
+          </div>
+          <div class="glass-card" style="padding:18px 22px;">
+            <h3 style="font-size:0.95rem;">📄 Fee Structure</h3>
+            <p>Department-wise fee breakdown</p>
+          </div>
+          <div class="glass-card" style="padding:18px 22px;">
+            <h3 style="font-size:0.95rem;">🏆 Scholarship</h3>
+            <p>Criteria, amount, eligibility</p>
+          </div>
+          <div class="glass-card" style="padding:18px 22px;">
+            <h3 style="font-size:0.95rem;">📖 Library</h3>
+            <p>Books, issues, member tracking</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========== SLIDE 8: API ENDPOINTS ========== -->
+      <section>
+        <span class="slide-tag">Backend</span>
+        <h2 class="slide-title smaller">REST API Endpoints</h2>
+        <p class="slide-subtitle">Clean RESTful API design with consistent JSON responses.</p>
+
+        <div class="split-layout" style="margin-top:20px;">
+          <div>
+            <ul class="feature-list" style="margin-top:0;">
+              <li><span class="feature-dot" style="background:var(--accent-purple);"></span><strong>/api/students</strong> — CRUD operations</li>
+              <li><span class="feature-dot" style="background:var(--accent-blue);"></span><strong>/api/faculty</strong> — Staff management</li>
+              <li><span class="feature-dot" style="background:var(--accent-cyan);"></span><strong>/api/departments</strong> — Org units</li>
+              <li><span class="feature-dot" style="background:var(--accent-lavender);"></span><strong>/api/courses</strong> — Curriculum</li>
+              <li><span class="feature-dot" style="background:#f59e0b;"></span><strong>/api/attendance</strong> — Daily records</li>
+            </ul>
+          </div>
+          <div>
+            <ul class="feature-list" style="margin-top:0;">
+              <li><span class="feature-dot" style="background:var(--accent-purple);"></span><strong>/api/exams</strong> — Schedule management</li>
+              <li><span class="feature-dot" style="background:var(--accent-blue);"></span><strong>/api/exam-results</strong> — Grading</li>
+              <li><span class="feature-dot" style="background:var(--accent-cyan);"></span><strong>/api/fees</strong> — Payments</li>
+              <li><span class="feature-dot" style="background:var(--accent-lavender);"></span><strong>/api/scholarships</strong> — Awards</li>
+              <li><span class="feature-dot" style="background:#f59e0b;"></span><strong>/api/library/*</strong> — Books &amp; Issues</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========== SLIDE 9: UI/UX DESIGN ========== -->
+      <section>
+        <span class="slide-tag">Design</span>
+        <h2 class="slide-title smaller">UI / UX Philosophy</h2>
+        <p class="slide-subtitle">A premium, immersive interface that makes university management delightful.</p>
+
+        <div class="cards-grid" style="margin-top:24px;">
+          <div class="glass-card">
+            <div class="icon-box" style="background:rgba(124,110,247,0.1);">🌌</div>
+            <h3>Glassmorphism</h3>
+            <p>Frosted-glass cards with subtle transparency, blur effects, and glowing borders for depth.</p>
+          </div>
+          <div class="glass-card">
+            <div class="icon-box" style="background:rgba(77,208,225,0.1);">✨</div>
+            <h3>Particle Effects</h3>
+            <p>Interactive particle canvas across landing, auth, and dashboard pages for a living feel.</p>
+          </div>
+          <div class="glass-card">
+            <div class="icon-box" style="background:rgba(91,156,246,0.1);">🎨</div>
+            <h3>Gradient System</h3>
+            <p>Curated purple-blue-cyan palette with smooth gradients that unify the entire experience.</p>
+          </div>
+          <div class="glass-card">
+            <div class="icon-box" style="background:rgba(179,157,219,0.1);">💫</div>
+            <h3>Micro-Animations</h3>
+            <p>Hover effects, page transitions, logo animations, and toast notifications for polish.</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========== SLIDE 10: USER FLOW ========== -->
+      <section>
+        <span class="slide-tag">Workflow</span>
+        <h2 class="slide-title smaller">User Flow</h2>
+        <p class="slide-subtitle">Seamless navigation from landing to any management module.</p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <h4>1 · Landing Page</h4>
+            <p>Animated logo with particle canvas → "Enter the System" button with glow effects</p>
+          </div>
+          <div class="timeline-item">
+            <h4>2 · Authentication</h4>
+            <p>Glassmorphic login card → credential validation against MySQL → "Access Granted" overlay</p>
+          </div>
+          <div class="timeline-item">
+            <h4>3 · Dashboard</h4>
+            <p>Stats grid (students, faculty, attendance, fees) → quick actions → announcements → calendar</p>
+          </div>
+          <div class="timeline-item">
+            <h4>4 · Module Pages</h4>
+            <p>Sidebar navigation → CRUD forms → data tables → search &amp; filter → toast confirmations</p>
+          </div>
+          <div class="timeline-item">
+            <h4>5 · Reports</h4>
+            <p>Student, attendance, finance &amp; exam reports with aggregated analytics</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========== SLIDE 11: KEY HIGHLIGHTS ========== -->
+      <section>
+        <span class="slide-tag">Highlights</span>
+        <h2 class="slide-title smaller">Key Highlights</h2>
+        <p class="slide-subtitle">What sets UniVerse apart from conventional management systems.</p>
+
+        <div class="split-layout" style="margin-top:24px;">
+          <div>
+            <ul class="feature-list" style="margin-top:0;">
+              <li>
+                <span class="feature-dot" style="background:var(--accent-purple);"></span>
+                <span><strong>30+ pages</strong> — comprehensive coverage of all university operations</span>
+              </li>
+              <li>
+                <span class="feature-dot" style="background:var(--accent-blue);"></span>
+                <span><strong>RESTful APIs</strong> — clean, documented JSON endpoints</span>
+              </li>
+              <li>
+                <span class="feature-dot" style="background:var(--accent-cyan);"></span>
+                <span><strong>Real-time Dashboard</strong> — live stats with animated counters</span>
+              </li>
+              <li>
+                <span class="feature-dot" style="background:var(--accent-lavender);"></span>
+                <span><strong>Secure Auth</strong> — password encryption via Spring Security Crypto</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div class="cards-grid" style="grid-template-columns:1fr 1fr; gap:14px; margin-top:0;">
+              <div class="stat-mini">
+                <div class="stat-num">30+</div>
+                <div class="stat-lbl">Pages</div>
+              </div>
+              <div class="stat-mini">
+                <div class="stat-num">15</div>
+                <div class="stat-lbl">Controllers</div>
+              </div>
+              <div class="stat-mini">
+                <div class="stat-num">14</div>
+                <div class="stat-lbl">Entities</div>
+              </div>
+              <div class="stat-mini">
+                <div class="stat-num">10+</div>
+                <div class="stat-lbl">APIs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========== SLIDE 12: FUTURE SCOPE ========== -->
+      <section>
+        <span class="slide-tag">Roadmap</span>
+        <h2 class="slide-title smaller">Future Scope</h2>
+        <p class="slide-subtitle">Planned enhancements to evolve UniVerse into a production-ready platform.</p>
+
+        <div class="cards-grid" style="margin-top:24px;">
+          <div class="glass-card">
+            <div class="icon-box" style="background:rgba(124,110,247,0.1);">📱</div>
+            <h3>Mobile Responsive</h3>
+            <p>Progressive Web App with native-like experience on phones and tablets.</p>
+          </div>
+          <div class="glass-card">
+            <div class="icon-box" style="background:rgba(91,156,246,0.1);">🔔</div>
+            <h3>Notifications</h3>
+            <p>Email &amp; push notifications for fee reminders, exam updates &amp; announcements.</p>
+          </div>
+          <div class="glass-card">
+            <div class="icon-box" style="background:rgba(77,208,225,0.1);">📈</div>
+            <h3>Advanced Analytics</h3>
+            <p>Interactive charts, performance trends, and predictive insights with Chart.js.</p>
+          </div>
+          <div class="glass-card">
+            <div class="icon-box" style="background:rgba(179,157,219,0.1);">👥</div>
+            <h3>Multi-Role Access</h3>
+            <p>Student, teacher, and parent portals with role-specific dashboards.</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========== SLIDE 13: CONCLUSION ========== -->
+      <section>
+        <span class="slide-tag">Summary</span>
+        <h2 class="slide-title">Conclusion</h2>
+        <p class="slide-subtitle">
+          UniVerse demonstrates that university management can be <span class="highlight">beautiful</span>, <span class="highlight">efficient</span>, and <span class="highlight">unified</span>. By combining a robust Spring Boot backend with an immersive glassmorphism frontend, we've built a system that simplifies operations while delighting users.
+        </p>
+        <div class="slide-divider"></div>
+        <div style="margin-top:24px; display:grid; grid-template-columns: repeat(3,1fr); gap:16px;">
+          <div class="glass-card" style="text-align:center;">
+            <div style="font-size:2rem; margin-bottom:8px;">🎯</div>
+            <h3>Problem Solved</h3>
+            <p>Unified fragmented university ops into one platform</p>
+          </div>
+          <div class="glass-card" style="text-align:center;">
+            <div style="font-size:2rem; margin-bottom:8px;">⚙️</div>
+            <h3>Full-Stack</h3>
+            <p>Java 17 + Spring Boot + MySQL + Modern Frontend</p>
+          </div>
+          <div class="glass-card" style="text-align:center;">
+            <div style="font-size:2rem; margin-bottom:8px;">🚀</div>
+            <h3>Production Ready</h3>
+            <p>Scalable architecture with room to grow</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========== SLIDE 14: THANK YOU ========== -->
+      <section class="thankyou-slide">
+        <div style="margin-bottom:10px;">
+          <div class="title-logo" style="width:90px;height:90px;">
+            <img src="assets/ums-logo.png" alt="UniVerse" style="width:60px;height:60px;" />
+          </div>
+        </div>
+        <h2 class="thankyou-title">Thank You!</h2>
+        <p class="thankyou-sub">We appreciate your time and attention</p>
+        <div class="slide-divider" style="margin:0 auto 32px;"></div>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-avatar">PP</div>
+            <div class="team-name">Prachi Pandey</div>
+            <div class="team-id">S25CSEU1097</div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar" style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-lavender));">A</div>
+            <div class="team-name">Anushka</div>
+            <div class="team-id">S25CSEU1113</div>
+          </div>
+        </div>
+
+        <p class="title-meta" style="margin-top:36px;">
+          UniVerse — University Management System &nbsp;·&nbsp; <span>April 2026</span>
+        </p>
+      </section>
+
+    </div><!-- /slides -->
+  </div><!-- /reveal -->
+
+  <!-- Reveal.js -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      center: false,
+      width: 1280,
+      height: 720,
+      margin: 0,
+      minScale: 0.2,
+      maxScale: 2.0,
+      controls: true,
+      controlsTutorial: false,
+      progress: true,
+      keyboard: true,
+      overview: true,
+      touch: true,
+    });
+  </script>
+</body>
+</html>
